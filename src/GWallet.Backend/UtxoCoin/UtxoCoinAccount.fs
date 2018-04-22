@@ -195,9 +195,7 @@ module internal Account =
                                      : list<UnspentTransactionOutputInfo>*int64 =
             match utxos with
             | [] ->
-                // should `raise InsufficientFunds` instead?
-                failwith (sprintf "Not enough funds (needed: %s, got so far: %s)"
-                                  (amount.ToString()) (soFarInSatoshis.ToString()))
+                raise InsufficientFunds
             | utxoInfo::tail ->
                 let newAcc = utxoInfo::acc
 
